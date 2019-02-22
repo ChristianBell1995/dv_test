@@ -10,7 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_22_112831) do
+ActiveRecord::Schema.define(version: 2019_02_22_142534) do
+
+  create_table "bananas", force: :cascade do |t|
+    t.integer "book_id"
+    t.string "flavour"
+    t.boolean "ripe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_bananas_on_book_id"
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "book_id"
+    t.string "color"
+    t.index ["book_id"], name: "index_bookmarks_on_book_id"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.integer "chapters"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.integer "text_id"
+    t.float "price"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["text_id"], name: "index_stories_on_text_id"
+  end
+
+  create_table "texts", force: :cascade do |t|
+    t.integer "bookmark_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bookmark_id"], name: "index_texts_on_bookmark_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
